@@ -13,3 +13,4 @@ terrible python code that i really don't care that much about and just use priva
 
 # MAINTENANCE
 Just ctrl+f any stuff titled "NEW MONTH:" after the end of the month and make sure that the dates are accurate
+also with how this code works you'll have to make a new spreadsheet for every month, sorry not sorry.
