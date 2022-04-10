@@ -38,7 +38,7 @@ roundscount = 0
 datafile = "./[YEAR]/TGMC_[MONTH].txt" # NEW MONTH: Change to appropriate [YEAR]/TGMC_[MONTH].txt file
 read_data = open(datafile, encoding="utf-8")
 
-# Looking for stuff, probably terribly inefficient but hey i got-
+# Looking for stuff, probably terribly inefficient but hey you got-
 # - a good enough computer, so it doesn't matter, right?
 for line in read_data:
     if "Ice Colony" in line:
