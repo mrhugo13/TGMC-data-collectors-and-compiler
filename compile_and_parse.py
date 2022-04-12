@@ -22,6 +22,7 @@ whisk_count = 0
 chigusa_count = 0
 icycaves_count = 0
 icarus_count = 0
+orion_count = 0
 # Ship maps
 theseus_count = 0
 minerva_count = 0
@@ -59,6 +60,8 @@ for line in read_data:
         icycaves_count += 1
     elif "Icarus" in line:
         icarus_count += 1
+    elif "Orion Military Outpost" in line: # NEW MONTH: Hey is this still merged/TM'd/open?
+        orion_count += 1
     if "Theseus" in line:
         theseus_count += 1
     elif "Minerva" in line:
@@ -96,6 +99,7 @@ Whiskey = ["Whiskey-Post.", whisk_count]
 Chigusa = ["Chigusa", chigusa_count]
 IcyCaves = ["Icy Caves", icycaves_count]
 Icarus = ["Icarus", icarus_count]
+Orion = ["Orion M.O.", orion_count]
 Theseus = ["Theseus", theseus_count]
 Minerva = ["Minerva", minerva_count]
 Sulaco = ["Sulaco", sulaco_count]
@@ -125,25 +129,26 @@ sheet.insert_row(PrisonStation,6)
 sheet.insert_row(Chigusa,7)
 quicksleep
 sheet.insert_row(IcyCaves,8)
-sheet.insert_row(Icarus,9) 
+sheet.insert_row(Icarus,9)
 sheet.insert_row(Whiskey,10)
-sheet.insert_row(['Post-round shipside map picks:'],12)
+sheet.insert_row(Orion,11)
 quicksleep
-sheet.update_cell(12,3, '% +/- difference')
-sheet.insert_row(Theseus,13)
-sheet.insert_row(Minerva,14)
-sheet.insert_row(Sulaco,15)
+sheet.insert_row(['Post-round shipside map picks:'],13)
+sheet.update_cell(13,3, '% +/- difference')
+sheet.insert_row(Theseus,14)
+sheet.insert_row(Minerva,15)
 quicksleep
-sheet.insert_row(Pillars,16)
-sheet.insert_row(['Round gamemodes:'],18)
-sheet.update_cell(18,3, '% +/- difference')
-sheet.insert_row(Crash,19)
+sheet.insert_row(Sulaco,16)
+sheet.insert_row(Pillars,17)
+sheet.insert_row(['Round gamemodes:'],19)
+sheet.update_cell(19,3, '% +/- difference')
 quicksleep
-sheet.insert_row(Distress,20)
-sheet.insert_row(Civilwar,21)
-sheet.insert_row(Nuclearwar,22)
-sheet.insert_row(Totalrounds,23)
+sheet.insert_row(Crash,20)
+sheet.insert_row(Distress,21)
+sheet.insert_row(Civilwar,22)
+sheet.insert_row(Nuclearwar,23)
 quicksleep
+sheet.insert_row(Totalrounds,24)
 sheet.update_cell(10,7,'All data here was collected between:')
 sheet.update_cell(11,7,'[MONTH] 1st and [MONTH] [END OF MONTH DAY], year [YEAR].') # NEW MONTH: Update month (& Year if needed)
 sheet.format(
@@ -151,41 +156,41 @@ sheet.format(
     {"backgroundColor": {"red": 1.0,"green": 0.0,"blue": 0.0},
     "horizontalAlignment": "CENTER",
     "textFormat": {"foregroundColor": {"red": 1.0,"green": 1.0,"blue": 0.0},"fontSize": 12,"bold": True}})
-sheet.format(
-    "A2:A10",
-    {"backgroundColor": {"red": 0.380,"green": 0.380,"blue": 0.380},
-    "textFormat": {"foregroundColor": {"red": 1.0,"green": 1.0,"blue": 0.0}}})
 quicksleep
 sheet.format(
-    "A13:A16",
+    "A2:A11",
     {"backgroundColor": {"red": 0.380,"green": 0.380,"blue": 0.380},
     "textFormat": {"foregroundColor": {"red": 1.0,"green": 1.0,"blue": 0.0}}})
 sheet.format(
-    "A18:A23",
+    "A13:A17",
+    {"backgroundColor": {"red": 0.380,"green": 0.380,"blue": 0.380},
+    "textFormat": {"foregroundColor": {"red": 1.0,"green": 1.0,"blue": 0.0}}})
+sheet.format(
+    "A19:A24",
     {"backgroundColor": {"red": 0.380,"green": 0.380,"blue": 0.380},
     "textFormat": {"foregroundColor": {"red": 1.0,"green": 1.0,"blue": 0.0}}})
 sheet.format(
     "A1:C1",
     {"backgroundColor": {"red": 0.380,"green": 0.380,"blue": 0.380},
     "textFormat": {"foregroundColor": {"red": 1.0,"green": 1.0,"blue": 0.0}}})
-sheet.format(
-    "A12:C12",
-    {"backgroundColor": {"red": 0.380,"green": 0.380,"blue": 0.380},
-    "textFormat": {"foregroundColor": {"red": 1.0,"green": 1.0,"blue": 0.0}}})
 quicksleep
 sheet.format(
-    "A18:C18",
+    "A13:C13",
+    {"backgroundColor": {"red": 0.380,"green": 0.380,"blue": 0.380},
+    "textFormat": {"foregroundColor": {"red": 1.0,"green": 1.0,"blue": 0.0}}})
+sheet.format(
+    "A19:C19",
     {"backgroundColor": {"red": 0.380,"green": 0.380,"blue": 0.380},
     "textFormat": {"foregroundColor": {"red": 1.0,"green": 1.0,"blue": 0.0}}})
 sheet.format("B2:C2", {"backgroundColor": {"red": 0.811,"green": 0.811,"blue": 0.811}})
 sheet.format("B4:C4", {"backgroundColor": {"red": 0.811,"green": 0.811,"blue": 0.811}})
-sheet.format("B6:C6", {"backgroundColor": {"red": 0.811,"green": 0.811,"blue": 0.811}})
 quicksleep
+sheet.format("B6:C6", {"backgroundColor": {"red": 0.811,"green": 0.811,"blue": 0.811}})
 sheet.format("B8:C8", {"backgroundColor": {"red": 0.811,"green": 0.811,"blue": 0.811}})
 sheet.format("B10:C10", {"backgroundColor": {"red": 0.811,"green": 0.811,"blue": 0.811}})
-sheet.format("B13:C13", {"backgroundColor": {"red": 0.811,"green": 0.811,"blue": 0.811}})
-sheet.format("B15:C15", {"backgroundColor": {"red": 0.811,"green": 0.811,"blue": 0.811}})
+sheet.format("B14:C14", {"backgroundColor": {"red": 0.811,"green": 0.811,"blue": 0.811}})
 quicksleep
-sheet.format("B19:C19", {"backgroundColor": {"red": 0.811,"green": 0.811,"blue": 0.811}})
-sheet.format("B21:C21", {"backgroundColor": {"red": 0.811,"green": 0.811,"blue": 0.811}})
-sheet.format("B23:C23", {"backgroundColor": {"red": 0.811,"green": 0.811,"blue": 0.811}})
+sheet.format("B16:C16", {"backgroundColor": {"red": 0.811,"green": 0.811,"blue": 0.811}})
+sheet.format("B20:C20", {"backgroundColor": {"red": 0.811,"green": 0.811,"blue": 0.811}})
+sheet.format("B22:C22", {"backgroundColor": {"red": 0.811,"green": 0.811,"blue": 0.811}})
+sheet.format("B24:C24", {"backgroundColor": {"red": 0.811,"green": 0.811,"blue": 0.811}})
