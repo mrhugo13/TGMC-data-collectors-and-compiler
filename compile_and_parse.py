@@ -109,7 +109,12 @@ Distress = ["Distress", distress_count]
 Civilwar = ["Civil War", civwar_count]
 Nuclearwar = ["Nuclear War",nuclearwar_count]
 Totalrounds = ["Total Rounds:", roundscount]
-quicksleep = time.sleep(2) # just to not bother with typing time.sleep(2) everytime, makes sure google isn't angry at us for writing too fast.
+#stuff to make things easier
+quicksleep = time.sleep(3) # just to not bother with typing time.sleep(3) everytime
+def shade(str):
+    sheet.format(str, {"backgroundColor": {"red": 0.811,"green": 0.811,"blue": 0.811}})
+def altshade(str):
+    sheet.format(str,{"backgroundColor": {"red": 0.380,"green": 0.380,"blue": 0.380},"textFormat": {"foregroundColor": {"red": 1.0,"green": 1.0,"blue": 0.0}}})
 ## The spreadsheet code
 #Delete & unformat anything we previously had there
 sheet.delete_rows(1,24)
@@ -157,40 +162,22 @@ sheet.format(
     "horizontalAlignment": "CENTER",
     "textFormat": {"foregroundColor": {"red": 1.0,"green": 1.0,"blue": 0.0},"fontSize": 12,"bold": True}})
 quicksleep
-sheet.format(
-    "A2:A11",
-    {"backgroundColor": {"red": 0.380,"green": 0.380,"blue": 0.380},
-    "textFormat": {"foregroundColor": {"red": 1.0,"green": 1.0,"blue": 0.0}}})
-sheet.format(
-    "A13:A17",
-    {"backgroundColor": {"red": 0.380,"green": 0.380,"blue": 0.380},
-    "textFormat": {"foregroundColor": {"red": 1.0,"green": 1.0,"blue": 0.0}}})
-sheet.format(
-    "A19:A24",
-    {"backgroundColor": {"red": 0.380,"green": 0.380,"blue": 0.380},
-    "textFormat": {"foregroundColor": {"red": 1.0,"green": 1.0,"blue": 0.0}}})
-sheet.format(
-    "A1:C1",
-    {"backgroundColor": {"red": 0.380,"green": 0.380,"blue": 0.380},
-    "textFormat": {"foregroundColor": {"red": 1.0,"green": 1.0,"blue": 0.0}}})
+altshade("A2:A11")
+altshade("A13:A17")
+altshade("A19:A24")
+altshade("A1:C1")
 quicksleep
-sheet.format(
-    "A13:C13",
-    {"backgroundColor": {"red": 0.380,"green": 0.380,"blue": 0.380},
-    "textFormat": {"foregroundColor": {"red": 1.0,"green": 1.0,"blue": 0.0}}})
-sheet.format(
-    "A19:C19",
-    {"backgroundColor": {"red": 0.380,"green": 0.380,"blue": 0.380},
-    "textFormat": {"foregroundColor": {"red": 1.0,"green": 1.0,"blue": 0.0}}})
-sheet.format("B2:C2", {"backgroundColor": {"red": 0.811,"green": 0.811,"blue": 0.811}})
-sheet.format("B4:C4", {"backgroundColor": {"red": 0.811,"green": 0.811,"blue": 0.811}})
+altshade("A13:C13")
+altshade("A19:C19")
+shade("B2:C2")
+shade("B4:C4")
 quicksleep
-sheet.format("B6:C6", {"backgroundColor": {"red": 0.811,"green": 0.811,"blue": 0.811}})
-sheet.format("B8:C8", {"backgroundColor": {"red": 0.811,"green": 0.811,"blue": 0.811}})
-sheet.format("B10:C10", {"backgroundColor": {"red": 0.811,"green": 0.811,"blue": 0.811}})
-sheet.format("B14:C14", {"backgroundColor": {"red": 0.811,"green": 0.811,"blue": 0.811}})
+shade("B6:C6")
+shade("B8:C8")
+shade("B10:C10")
+shade("B14:C14")
 quicksleep
-sheet.format("B16:C16", {"backgroundColor": {"red": 0.811,"green": 0.811,"blue": 0.811}})
-sheet.format("B20:C20", {"backgroundColor": {"red": 0.811,"green": 0.811,"blue": 0.811}})
-sheet.format("B22:C22", {"backgroundColor": {"red": 0.811,"green": 0.811,"blue": 0.811}})
-sheet.format("B24:C24", {"backgroundColor": {"red": 0.811,"green": 0.811,"blue": 0.811}})
+shade("B16:C16")
+shade("B20:C20")
+shade("B22:C22")
+shade("B24:C24")
