@@ -147,20 +147,30 @@ client = gspread.authorize(creds)
 # Format i personally use is "TGMC_Datasheet_[Month]_[Year]"
 sheet = client.open("TGMC_Datasheet_[Month]_[Year]").sheet1 # NEW MONTH: Change to appropriate month/year sheet 
 
-#stuff to make things easier
-quicksleep = time.sleep(3) # just to not bother with typing time.sleep(3) everytime
+#stuff to make things easier for us here
+sleep_delay = 2 # less typing
 def shade(str):
+    time.sleep(sleep_delay)
     sheet.format(str, {"backgroundColor": {"red": 0.811,"green": 0.811,"blue": 0.811}})
 def altshade(str):
+    time.sleep(sleep_delay)
     sheet.format(str,{"backgroundColor": {"red": 0.380,"green": 0.380,"blue": 0.380},"textFormat": {"foregroundColor": {"red": 1.0,"green": 1.0,"blue": 0.0}}})
 def thingstats(dict,index):
     x = dict["count"]
     y = dict["name"]
     z = [y,x]
+    a = str(z)
+    pprint(z)
+    f = open("[YEAR]_results/TGMC_[MONTH].txt", "a") #NEW MONTH: check year/month
+    f.write(a + "\n")
+    f.close
+    time.sleep(sleep_delay)
     sheet.insert_row(z,index)
 ## The spreadsheet code
 #Delete & unformat anything we previously had there
 sheet.delete_rows(1,24)
+f = open("[YEAR]_results/TGMC_[MONTH].txt", "w") #NEW MONTH: check year/month
+f.close
 #New stuff
 ###
 # by the way, % +/- difference is done manually from last month's pie charts, this code doesn't
