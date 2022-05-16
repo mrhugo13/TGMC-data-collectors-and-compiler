@@ -1,14 +1,62 @@
-######################################################################################
-###                                                                                ###
-# Quick note: all the [YEAR] and [MONTH] stuff isn't actual code, it's just meant to #
-# be the place where you input the current month and year.                           #
-###                                                                                ###
-######################################################################################
 #Imports
 from pprint import pprint
-import time
-import gspread
-from oauth2client.service_account import ServiceAccountCredentials
+from openpyxl import Workbook
+from datetime import datetime
+
+## This is to determine the month so we don't have to do as much maintenance.
+pickmonth = input("Is the data from current or previous month? Y for current, N for previous: ")
+match pickmonth:
+    case "Y":
+        currentMonth = datetime.now().month
+    case "N":
+        currentMonth = datetime.now().month - 1
+    case _:
+        print("Invalid input - Stopping program")
+        exit()
+pickyear = input("Is the data from current or previous year? Y for current, N for previous: ")
+match pickyear:
+    case "Y":
+        currentYear = datetime.now().year
+    case "N":
+        currentYear = datetime.now().year - 1
+    case _:
+        print("Invalid input - Stopping program")
+        exit()
+
+themonth = "TGMC_"
+match currentMonth:
+    case 0:
+        themonth += "December"
+    case 1:
+        themonth += "January"
+    case 2:
+        themonth += "February"
+    case 3:
+        themonth += "March"
+    case 4:
+        themonth += "April"
+    case 5:
+        themonth += "May"
+    case 6:
+        themonth += "June"
+    case 7:
+        themonth += "July"
+    case 8:
+        themonth += "August"
+    case 9:
+        themonth += "September"
+    case 10:
+        themonth += "October"
+    case 11:
+        themonth += "November"
+    case 12:
+        themonth += "December"
+
+# i really don't wanna maintain the month/year thingy
+file_name_txt = str("./" + str(currentYear) + "/" + themonth + ".txt")
+file_name_txt_results = str("./" + str(currentYear) + "_results/" + themonth + ".txt")
+file_name_xlsx = str("./" + str(currentYear) + "/" + themonth + ".xlsx")
+file_name_xlsx_results = str("./" + str(currentYear) + "_results/" + themonth + ".xlsx")
 
 ## Compiling data stuff for spreadsheet
 
@@ -27,7 +75,7 @@ v624 = {
     "count": 0
 }
 magmoor = {
-    "name": "Magmoor",
+    "name": "Magmoor Digsite IV",
     "count": 0
 }
 prisonstation = {
@@ -35,7 +83,7 @@ prisonstation = {
     "count": 0
 }
 whiskeyoutpost = {
-    "name": "Whiskey",
+    "name": "Whiskey Outpost",
     "count": 0
 }
 chigusa = {
@@ -47,11 +95,15 @@ icycaves = {
     "count": 0
 }
 icarus = {
-    "name": "Icarus",
+    "name": "Icarus Military Port",
     "count": 0
 }
 orion = {
-    "name": "Orion",
+    "name": "Orion Military Outpost",
+    "count": 0
+}
+polarcolony = {
+    "name": "Rocinante Polar Colony",
     "count": 0
 }
 # Ship maps
@@ -68,7 +120,7 @@ sulaco = {
     "count": 0
 }
 pillars = {
-    "name": "Pillars",
+    "name": "Pillar of Spring",
     "count": 0
 }
 # Gamemode
@@ -94,7 +146,7 @@ roundsamount = {
     "count": 0
 }
 #The file
-datafile = "./[YEAR]/TGMC_[MONTH].txt" # NEW MONTH: Change to appropriate [YEAR]/TGMC_[MONTH].txt file
+datafile = file_name_txt
 read_data = open(datafile, encoding="utf-8")
 
 # Looking for stuff, probably terribly inefficient but hey i got-
@@ -115,11 +167,13 @@ for line in read_data:
     elif chigusa["name"] in line:
         chigusa["count"] += 1
     elif icycaves["name"] in line:
-        prisonstation["count"] += 1
+        icycaves["count"] += 1
     elif icarus["name"] in line:
         icarus["count"] += 1
     elif orion["name"] in line: # NEW MONTH: Hey is this still merged/TM'd/open?
         orion["count"] += 1
+    elif polarcolony["name"] in line: # NEW MONTH: Hey is this still merged/TM'd/open?
+        polarcolony["count"] += 1
     if theseus["name"] in line:
         theseus["count"] += 1
     elif minerva["name"] in line:
@@ -140,99 +194,75 @@ for line in read_data:
         roundsamount["count"] += 1
 
 ## Spreadsheet stuff
-
-#Things we need for spreadsheet to run
-scope = ["https://spreadsheets.google.com/feeds",'https://www.googleapis.com/auth/spreadsheets',"https://www.googleapis.com/auth/drive.file","https://www.googleapis.com/auth/drive"]
-creds = ServiceAccountCredentials.from_json_keyfile_name("creds.json", scope) #hey you remembered to watch the video in the README.md yeah?
-client = gspread.authorize(creds)
-# Format i personally use is "TGMC_Datasheet_[Month]_[Year]"
-sheet = client.open("TGMC_Datasheet_[Month]_[Year]").sheet1 # NEW MONTH: Change to appropriate month/year sheet 
-
 #stuff to make things easier for us here
-sleep_delay = 2 # less typing
-def shade(str):
-    time.sleep(sleep_delay)
-    sheet.format(str, {"backgroundColor": {"red": 0.811,"green": 0.811,"blue": 0.811}})
-def altshade(str):
-    time.sleep(sleep_delay)
-    sheet.format(str,{"backgroundColor": {"red": 0.380,"green": 0.380,"blue": 0.380},"textFormat": {"foregroundColor": {"red": 1.0,"green": 1.0,"blue": 0.0}}})
-def thingstats(dict,index):
+wb = Workbook()
+ws = wb.active
+def thingstats(dict):
     x = dict["count"]
     y = dict["name"]
     z = [y,x]
     a = str(z)
     pprint(z)
-    f = open("[YEAR]_results/TGMC_[MONTH].txt", "a") #NEW MONTH: check year/month
+    f = open(file_name_txt_results, "a")
     f.write(a + "\n")
     f.close
-    time.sleep(sleep_delay)
-    sheet.insert_row(z,index)
+    f = open(file_name_xlsx_results, "a")
+    f.close
+    ws.append(z)
+    wb.save(file_name_xlsx_results)
+def whitespace():
+    ws.append([" "," "])
+    wb.save(file_name_xlsx_results)
+def whatisit(str1, str2, str3):
+    ws.append([str1,str2, str3])
+    wb.save(file_name_xlsx_results)
 ## The spreadsheet code
 #Delete & unformat anything we previously had there
-sheet.delete_rows(1,24)
-f = open("[YEAR]_results/TGMC_[MONTH].txt", "w") #NEW MONTH: check year/month
+f = open(file_name_xlsx_results, "w")
+f.close
+f = open(file_name_txt_results, "w")
 f.close
 #New stuff
-###
-# by the way, % +/- difference is done manually from last month's pie charts, this code doesn't
-# actually do anything related to % +/- differences.
-###
-sheet.insert_row(['Post-round groundside map picks:'])
-sheet.update_cell(1,3, '% +/- difference')
-thingstats(bigred,2)
-thingstats(icecolony,3)
-quicksleep
-thingstats(v624,4)
-thingstats(magmoor,5)
-thingstats(prisonstation,6)
-thingstats(chigusa,7)
-quicksleep
-thingstats(icycaves,8)
-thingstats(icarus,9)
-thingstats(whiskeyoutpost,10)
-thingstats(orion,11)
-quicksleep
-sheet.insert_row(['Post-round shipside map picks:'],13)
-sheet.update_cell(13,3, '% +/- difference')
-thingstats(theseus,14)
-thingstats(minerva,15)
-quicksleep
-thingstats(sulaco,16)
-thingstats(pillars,17)
-sheet.insert_row(['Round gamemodes:'],19)
-sheet.update_cell(19,3, '% +/- difference')
-quicksleep
-thingstats(crash,20)
-thingstats(distress,21)
-thingstats(civilwar,22)
-thingstats(nuclearwar,23)
-quicksleep
-thingstats(roundsamount,24)
-sheet.update_cell(10,7,'All data here was collected between:')
-sheet.update_cell(10,7,'All data here was collected between:')
-sheet.update_cell(11,7,'[MONTH] 1st and [MONTH] [END OF MONTH DAY], year [YEAR].') # NEW MONTH: Update month (& Year if needed)
-sheet.format(
-    "E9:I12", 
-    {"backgroundColor": {"red": 1.0,"green": 0.0,"blue": 0.0},
-    "horizontalAlignment": "CENTER",
-    "textFormat": {"foregroundColor": {"red": 1.0,"green": 1.0,"blue": 0.0},"fontSize": 12,"bold": True}})
-quicksleep
-altshade("A2:A11")
-altshade("A13:A17")
-altshade("A19:A24")
-altshade("A1:C1")
-quicksleep
-altshade("A13:C13")
-altshade("A19:C19")
-shade("B2:C2")
-shade("B4:C4")
-quicksleep
-shade("B6:C6")
-shade("B8:C8")
-shade("B10:C10")
-shade("B14:C14")
-quicksleep
-shade("B16:C16")
-shade("B20:C20")
-shade("B22:C22")
-shade("B24:C24")
+whatisit("Post-round groundside map choices", "Times picked","% increase/decrease")
+thingstats(bigred)
+thingstats(icecolony)
+thingstats(v624)
+thingstats(magmoor)
+thingstats(prisonstation)
+thingstats(chigusa)
+thingstats(icycaves)
+thingstats(icarus)
+thingstats(whiskeyoutpost)
+thingstats(orion)
+thingstats(polarcolony)
+whitespace()
+whatisit("Post-round shipside map choices", "Times picked","% increase/decrease")
+thingstats(theseus)
+thingstats(minerva)
+thingstats(sulaco)
+thingstats(pillars)
+whitespace()
+whatisit("Gamemodes", "Times played","% Increase/decrease")
+thingstats(crash)
+thingstats(distress)
+thingstats(civilwar)
+thingstats(nuclearwar)
+whitespace()
+whatisit("Rounds played:", " ", " ")
+thingstats(roundsamount)
+## Style stuff for spreadsheet
+# this just adjusts columns to fit our data
+# stolen from velis @ https://stackoverflow.com/questions/13197574/openpyxl-adjust-column-width-size
+dims = {}
+for row in ws.rows:
+    for cell in row:
+        if cell.value:
+            dims[cell.column_letter] = max((dims.get(cell.column_letter, 0), len(str(cell.value))))    
+for col, value in dims.items():
+    ws.column_dimensions[col].width = value
+
+# coloring stuff in to look prettier
+# todo: i hate colors
+
+# saving all the style stuff
+wb.save(file_name_xlsx_results)
