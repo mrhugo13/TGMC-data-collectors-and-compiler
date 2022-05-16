@@ -20,7 +20,7 @@ match pickyear:
     case "N":
         currentYear = datetime.now().year - 1
     case _:
-        print("Invalid input - Stopping program")
+        print("Invalid input - Exitting program")
         exit()
 
 themonth = "TGMC_"
