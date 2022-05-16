@@ -11,7 +11,7 @@ match pickmonth:
     case "N":
         currentMonth = datetime.now().month - 1
     case _:
-        print("Invalid input - Stopping program")
+        print("Invalid input - Exitting program")
         exit()
 pickyear = input("Is the data from current or previous year? Y for current, N for previous: ")
 match pickyear:
