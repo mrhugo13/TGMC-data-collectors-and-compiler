@@ -2,16 +2,13 @@
 terrible python code that i really don't care that much about and just use privately
 
 # HOW-TO-USE
-1. setup so everything works as outlined in this video: https://youtu.be/cnPlKLEGR7E
-2. setup a .txt file that it reads from and put in the TGMC data there, personally i just get the data from the discord's #game-updates but you do you just make sure to fit it in with the code or adjust the code to make it work.
-3. this is how the files & directories should (roughly) look like to make the code work:
+![bild](https://user-images.githubusercontent.com/17747087/168641722-55f9a989-e3c1-4310-9894-c368de2333a0.png)
 
-![Code_2022-05-09_18-49-41](https://user-images.githubusercontent.com/17747087/167459018-0100de1d-e341-4ac3-abfa-600cd4f61046.png)
-
-4. run in vsc or whatever
-5. cry
-
+1. [input year] -> actual year, current or previous.
+2. put input .txt file with data (i get mine from the TGMC discord's #game-updates channel)
+3. check if the data's spelling of the map names fit with the program (if they do not just change the `"name:"` definitions inside the dicts for the appropriate maps)
+4. run program through `py compile_and_parse.py` in command-line or through VSC, you pick however you want to do it.
+5. you'll be quickly asked for some input on wheter the data is from previous or current month/year (todo: let you pick which month/year through numbers instead of Y/N)
+6. the program will run and given that everything you have done is the exact same way i have done it, it *should* work.
 # MAINTENANCE
-Just ctrl+f any stuff titled "NEW MONTH:" after the end of the month and make sure that the dates are accurate
-
-also with how this code works you'll have to make a new spreadsheet for every month, sorry not sorry.
+shouldn't be anything major, maybe check anything with `# NEW MONTH:` attached to it but otherwise eh.
