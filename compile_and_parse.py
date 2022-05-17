@@ -1,27 +1,29 @@
 #Imports
+from asyncio.windows_events import NULL
 from pprint import pprint
 from openpyxl import Workbook
 from datetime import datetime
 
 ## This is to determine the month so we don't have to do as much maintenance.
-pickmonth = input("Is the data from current or previous month? Y for current, N for previous: ")
-match pickmonth:
+
+manualorautomatic = input("Would you like to input month/year manually (Y) or have it done automatically for todays year/month? (N): ")
+manualorautomaticpicked = NULL
+match manualorautomatic:
     case "Y":
+        print("You have picked to input month/year manually.")
+        manualorautomaticpicked = True
+    case "N":
+        print("You have picked to have the month/year part automated")
+        manualorautomaticpicked = False
         currentMonth = datetime.now().month
-    case "N":
-        currentMonth = datetime.now().month - 1
-    case _:
-        print("Invalid input - Exitting program")
-        exit()
-pickyear = input("Is the data from current or previous year? Y for current, N for previous: ")
-match pickyear:
-    case "Y":
         currentYear = datetime.now().year
-    case "N":
-        currentYear = datetime.now().year - 1
     case _:
-        print("Invalid input - Exitting program")
+        print("Invalid input - Exitting program.")
         exit()
+
+if(manualorautomaticpicked):
+    currentMonth = int(input("Pick the month of the year (1 is January and 12 is December): "))
+    currentYear = int(input("Pick the year desired: "))
 
 themonth = "TGMC_"
 match currentMonth:
@@ -51,6 +53,9 @@ match currentMonth:
         themonth += "November"
     case 12:
         themonth += "December"
+    case _:
+        print("Invalid month picked - Exitting program.")
+        exit()
 
 # i really don't wanna maintain the month/year thingy
 file_name_txt = str("./" + str(currentYear) + "/" + themonth + ".txt")
@@ -163,7 +168,7 @@ for line in read_data:
     elif prisonstation["name"] in line:
         prisonstation["count"] += 1
     elif whiskeyoutpost["name"] in line:
-        whiskeyoutpost["name"] += 1
+        whiskeyoutpost["count"] += 1
     elif chigusa["name"] in line:
         chigusa["count"] += 1
     elif icycaves["name"] in line:
