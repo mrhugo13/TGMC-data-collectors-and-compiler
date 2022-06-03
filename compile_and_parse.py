@@ -58,10 +58,10 @@ match currentMonth:
         exit()
 
 # i really don't wanna maintain the month/year thingy
-file_name_txt = str("./" + str(currentYear) + "/" + themonth + ".txt")
-file_name_txt_results = str("./" + str(currentYear) + "_results/" + themonth + ".txt")
-file_name_xlsx = str("./" + str(currentYear) + "/" + themonth + ".xlsx")
-file_name_xlsx_results = str("./" + str(currentYear) + "_results/" + themonth + ".xlsx")
+file_name_txt = f"./{currentYear}/{themonth}.txt"
+file_name_txt_results = f"./{currentYear}_results/{themonth}.txt"
+file_name_xlsx = f"./{currentYear}/{themonth}.xlsx"
+file_name_xlsx_results = f"./{currentYear}_results/{themonth}.xlsx"
 
 ## Compiling data stuff for spreadsheet
 
@@ -109,6 +109,10 @@ orion = {
 }
 polarcolony = {
     "name": "Rocinante Polar Colony",
+    "count": 0
+}
+researchoutpost = {
+    "name": "Research Outpost",
     "count": 0
 }
 # Ship maps
@@ -175,10 +179,12 @@ for line in read_data:
         icycaves["count"] += 1
     elif icarus["name"] in line:
         icarus["count"] += 1
-    elif orion["name"] in line: # NEW MONTH: Hey is this still merged/TM'd/open?
+    elif orion["name"] in line:
         orion["count"] += 1
     elif polarcolony["name"] in line: # NEW MONTH: Hey is this still merged/TM'd/open?
         polarcolony["count"] += 1
+    elif researchoutpost["name"] in line:
+        researchoutpost["count"] += 1
     if theseus["name"] in line:
         theseus["count"] += 1
     elif minerva["name"] in line:
@@ -209,10 +215,8 @@ def thingstats(dict):
     a = str(z)
     pprint(z)
     f = open(file_name_txt_results, "a")
-    f.write(a + "\n")
-    f.close
+    f.write(f"{a}\n")
     f = open(file_name_xlsx_results, "a")
-    f.close
     ws.append(z)
     wb.save(file_name_xlsx_results)
 def whitespace():
@@ -224,9 +228,7 @@ def whatisit(str1, str2, str3):
 ## The spreadsheet code
 #Delete & unformat anything we previously had there
 f = open(file_name_xlsx_results, "w")
-f.close
 f = open(file_name_txt_results, "w")
-f.close
 #New stuff
 whatisit("Post-round groundside map choices", "Times picked","% increase/decrease")
 thingstats(bigred)
@@ -240,6 +242,7 @@ thingstats(icarus)
 thingstats(whiskeyoutpost)
 thingstats(orion)
 thingstats(polarcolony)
+thingstats(researchoutpost)
 whitespace()
 whatisit("Post-round shipside map choices", "Times picked","% increase/decrease")
 thingstats(theseus)
@@ -271,3 +274,4 @@ for col, value in dims.items():
 
 # saving all the style stuff
 wb.save(file_name_xlsx_results)
+f.close() #just to make sure we have everything closed at the end of this program
