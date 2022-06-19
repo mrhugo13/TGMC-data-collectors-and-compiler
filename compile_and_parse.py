@@ -69,91 +69,116 @@ file_name_xlsx_results = f"./{currentYear}_results/{themonth}.xlsx"
 # Groundside maps
 icecolony = {
     "name": "Ice Colony",
-    "count": 0
+    "count": 0,
+    "percentage": 0
 }
 bigred = {
     "name": "Big Red",
-    "count": 0
+    "count": 0,
+    "percentage": 0
 }
 v624 = {
     "name": "LV624",
-    "count": 0
+    "count": 0,
+    "percentage": 0
 }
 magmoor = {
     "name": "Magmoor Digsite IV",
-    "count": 0
+    "count": 0,
+    "percentage": 0
 }
 prisonstation = {
     "name": "Prison Station",
-    "count": 0
+    "count": 0,
+    "percentage": 0
 }
 whiskeyoutpost = {
     "name": "Whiskey Outpost",
-    "count": 0
+    "count": 0,
+    "percentage": 0
 }
 chigusa = {
     "name": "Chigusa",
-    "count": 0
+    "count": 0,
+    "percentage": 0
 }
 icycaves = {
     "name": "Icy Caves",
-    "count": 0
+    "count": 0,
+    "percentage": 0
 }
 icarus = {
     "name": "Icarus Military Port",
-    "count": 0
+    "count": 0,
+    "percentage": 0
 }
 orion = {
     "name": "Orion Military Outpost",
-    "count": 0
+    "count": 0,
+    "percentage": 0
 }
 polarcolony = {
     "name": "Rocinante Polar Colony",
-    "count": 0
+    "count": 0,
+    "percentage": 0
 }
 researchoutpost = {
     "name": "Research Outpost",
-    "count": 0
+    "count": 0,
+    "percentage": 0
 }
 # Ship maps
 theseus = {
     "name": "Theseus",
-    "count": 0
+    "count": 0,
+    "percentage": 0
 }
 minerva = {
     "name": "Minerva",
-    "count": 0
+    "count": 0,
+    "percentage": 0
 }
 sulaco = {
     "name": "Sulaco",
-    "count": 0
+    "count": 0,
+    "percentage": 0
 }
 pillars = {
     "name": "Pillar of Spring",
-    "count": 0
+    "count": 0,
+    "percentage": 0
 }
 # Gamemode
 crash = {
     "name": "Crash",
-    "count": 0
+    "count": 0,
+    "percentage": 0
 }
 distress = {
     "name": "Distress",
-    "count": 0
+    "count": 0,
+    "percentage": 0
 }
 civilwar = {
     "name": "Civil War",
-    "count": 0
+    "count": 0,
+    "percentage": 0
 }
 nuclearwar = {
     "name": "Nuclear War",
-    "count": 0
+    "count": 0,
+    "percentage": 0
 }
 # Amount of rounds
 roundsamount = {
     "name": "Round ID",
-    "count": 0
+    "count": 0,
+    "percentage": "N/A" #this is irrelevant
 }
+# total count of ships/groundmaps/gamemodes so we can automate percentages
+groundmapstotalcount = 0
+shipmapstotalcount = 0
+gamemodestotalcount = 0
 #The file
 datafile = file_name_txt
 read_data = open(datafile, encoding="utf-8")
@@ -163,44 +188,64 @@ read_data = open(datafile, encoding="utf-8")
 for line in read_data:
     if icecolony["name"] in line:
         icecolony["count"] += 1
+        groundmapstotalcount += 1
     elif bigred["name"] in line:
         bigred["count"] += 1
+        groundmapstotalcount += 1
     elif v624["name"] in line:
         v624["count"] += 1
+        groundmapstotalcount += 1
     elif magmoor["name"] in line:
         magmoor["count"] += 1
+        groundmapstotalcount += 1
     elif prisonstation["name"] in line:
         prisonstation["count"] += 1
+        groundmapstotalcount += 1
     elif whiskeyoutpost["name"] in line:
         whiskeyoutpost["count"] += 1
+        groundmapstotalcount += 1
     elif chigusa["name"] in line:
         chigusa["count"] += 1
+        groundmapstotalcount += 1
     elif icycaves["name"] in line:
         icycaves["count"] += 1
+        groundmapstotalcount += 1
     elif icarus["name"] in line:
         icarus["count"] += 1
+        groundmapstotalcount += 1
     elif orion["name"] in line:
         orion["count"] += 1
+        groundmapstotalcount += 1
     elif polarcolony["name"] in line: # NEW MONTH: Hey is this still merged/TM'd/open?
         polarcolony["count"] += 1
+        groundmapstotalcount += 1
     elif researchoutpost["name"] in line:
         researchoutpost["count"] += 1
+        groundmapstotalcount += 1
     if theseus["name"] in line:
         theseus["count"] += 1
+        shipmapstotalcount = 0
     elif minerva["name"] in line:
         minerva["count"] += 1
+        shipmapstotalcount = 0
     elif sulaco["name"] in line:
         sulaco["count"] += 1
+        shipmapstotalcount = 0
     elif pillars["name"] in line:
         pillars["count"] += 1
+        shipmapstotalcount = 0
     if crash["name"] in line:
         crash["count"] += 1
+        gamemodestotalcount = 0
     elif distress["name"] in line:
         distress["count"] += 1
+        gamemodestotalcount = 0
     elif nuclearwar["name"] in line:
         nuclearwar["count"] += 1
+        gamemodestotalcount = 0
     elif civilwar["name"] in line:
         civilwar["count"] += 1
+        gamemodestotalcount = 0
     if roundsamount["name"] in line:
         roundsamount["count"] += 1
 
@@ -208,10 +253,14 @@ for line in read_data:
 #stuff to make things easier for us here
 wb = Workbook()
 ws = wb.active
+groundmaps = [icecolony,icycaves,bigred,v624,magmoor,whiskeyoutpost,researchoutpost,polarcolony,orion,icarus,chigusa,prisonstation]
+shipmaps = [theseus, minerva, sulaco, pillars]
+gamemodes = [crash, distress, nuclearwar, civilwar]
 def thingstats(dict):
+    w = dict["percentage"]
     x = dict["count"]
     y = dict["name"]
-    z = [y,x]
+    z = [y,x,w]
     a = str(z)
     pprint(z)
     f = open(file_name_txt_results, "a")
@@ -222,15 +271,28 @@ def thingstats(dict):
 def whitespace():
     ws.append([" "," "])
     wb.save(file_name_xlsx_results)
-def whatisit(str1, str2, str3):
-    ws.append([str1,str2, str3])
+def whatisit(str1, str2, str3, str4):
+    ws.append([str1,str2, str3, str4])
     wb.save(file_name_xlsx_results)
+def percentagemathing(list):
+    for dict in list:
+        if (dict["count"] < 1):
+            dict["percentage"] = "N/A"
+        else:
+            dict["percentage"] = (dict["count"] / groundmapstotalcount) * 100
+            dict["percentage"] = round(dict["percentage"], 1)
+            dict["percentage"] = str(dict["percentage"])
+            dict["percentage"] += "%"
 ## The spreadsheet code
 #Delete & unformat anything we previously had there
 f = open(file_name_xlsx_results, "w")
 f = open(file_name_txt_results, "w")
+#counting percentages
+percentagemathing(groundmaps)
+percentagemathing(shipmaps)
+percentagemathing(gamemodes)
 #New stuff
-whatisit("Post-round groundside map choices", "Times picked","% increase/decrease")
+whatisit("Post-round groundside map choices", "Times picked", "% picked","% increase/decrease")
 thingstats(bigred)
 thingstats(icecolony)
 thingstats(v624)
@@ -244,19 +306,19 @@ thingstats(orion)
 thingstats(polarcolony)
 thingstats(researchoutpost)
 whitespace()
-whatisit("Post-round shipside map choices", "Times picked","% increase/decrease")
+whatisit("Post-round shipside map choices", "Times picked", "% picked","% increase/decrease")
 thingstats(theseus)
 thingstats(minerva)
 thingstats(sulaco)
 thingstats(pillars)
 whitespace()
-whatisit("Gamemodes", "Times played","% Increase/decrease")
+whatisit("Gamemodes", "Times played", "% played","% Increase/decrease")
 thingstats(crash)
 thingstats(distress)
 thingstats(civilwar)
 thingstats(nuclearwar)
 whitespace()
-whatisit("Rounds played:", " ", " ")
+whatisit("Rounds played:", " ", " ", " ")
 thingstats(roundsamount)
 ## Style stuff for spreadsheet
 # this just adjusts columns to fit our data
