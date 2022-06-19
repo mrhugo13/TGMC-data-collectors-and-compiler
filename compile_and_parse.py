@@ -224,28 +224,28 @@ for line in read_data:
         groundmapstotalcount += 1
     if theseus["name"] in line:
         theseus["count"] += 1
-        shipmapstotalcount = 0
+        shipmapstotalcount += 1
     elif minerva["name"] in line:
         minerva["count"] += 1
-        shipmapstotalcount = 0
+        shipmapstotalcount += 1
     elif sulaco["name"] in line:
         sulaco["count"] += 1
-        shipmapstotalcount = 0
+        shipmapstotalcount += 1
     elif pillars["name"] in line:
         pillars["count"] += 1
-        shipmapstotalcount = 0
+        shipmapstotalcount += 1
     if crash["name"] in line:
         crash["count"] += 1
-        gamemodestotalcount = 0
+        gamemodestotalcount += 1
     elif distress["name"] in line:
         distress["count"] += 1
-        gamemodestotalcount = 0
+        gamemodestotalcount += 1
     elif nuclearwar["name"] in line:
         nuclearwar["count"] += 1
-        gamemodestotalcount = 0
+        gamemodestotalcount += 1
     elif civilwar["name"] in line:
         civilwar["count"] += 1
-        gamemodestotalcount = 0
+        gamemodestotalcount += 1
     if roundsamount["name"] in line:
         roundsamount["count"] += 1
 
