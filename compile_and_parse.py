@@ -274,12 +274,12 @@ def whitespace():
 def whatisit(str1, str2, str3, str4):
     ws.append([str1,str2, str3, str4])
     wb.save(file_name_xlsx_results)
-def percentagemathing(list):
+def percentagemathing(list, var):
     for dict in list:
         if (dict["count"] < 1):
             dict["percentage"] = "N/A"
         else:
-            dict["percentage"] = (dict["count"] / groundmapstotalcount) * 100
+            dict["percentage"] = (dict["count"] / var) * 100
             dict["percentage"] = round(dict["percentage"], 1)
             dict["percentage"] = str(dict["percentage"])
             dict["percentage"] += "%"
@@ -288,9 +288,9 @@ def percentagemathing(list):
 f = open(file_name_xlsx_results, "w")
 f = open(file_name_txt_results, "w")
 #counting percentages
-percentagemathing(groundmaps)
-percentagemathing(shipmaps)
-percentagemathing(gamemodes)
+percentagemathing(groundmaps, groundmapstotalcount)
+percentagemathing(shipmaps, shipmapstotalcount)
+percentagemathing(gamemodes, gamemodestotalcount)
 #New stuff
 whatisit("Post-round groundside map choices", "Times picked", "% picked","% increase/decrease")
 thingstats(bigred)
