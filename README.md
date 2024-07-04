@@ -5,7 +5,7 @@ terrible python code that i really don't care that much about and just use priva
 template
 ![Code_2024-07-04_16-17-19](https://github.com/mrhugo13/TGMC-data-collectors-and-compiler/assets/17747087/fcb3fdc8-01c9-4d97-b672-3706765b3043)
 
-ty current setup
+my current setup
 ![Code_2024-07-04_16-23-21](https://github.com/mrhugo13/TGMC-data-collectors-and-compiler/assets/17747087/db62882d-47e1-4835-9a98-1e705f4113b0)
 
 1. make things generally look like above
