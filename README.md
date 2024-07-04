@@ -9,7 +9,7 @@ my current setup
 ![Code_2024-07-04_16-23-21](https://github.com/mrhugo13/TGMC-data-collectors-and-compiler/assets/17747087/db62882d-47e1-4835-9a98-1e705f4113b0)
 
 1. make things generally look like above
-2. input TGMC_.txt file with data (i get mine from the TGMC discord's #game-updates channel)
+2. input TGMC_[month].txt file with data (i get mine from the TGMC discord's #game-updates channel)
 3. create config.txt file that looks somewhat like this
 template
 ![bild](https://github.com/mrhugo13/TGMC-data-collectors-and-compiler/assets/17747087/33874e8c-6519-4648-a13e-65cb4d1279b7)
