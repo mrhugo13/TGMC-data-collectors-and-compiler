@@ -12,7 +12,7 @@ my current setup
 2. input TGMC_[month].txt file with data (i get mine from the TGMC discord's #game-updates channel)
 3. create config.txt file that looks somewhat like this
 template
-![bild](https://github.com/mrhugo13/TGMC-data-collectors-and-compiler/assets/17747087/33874e8c-6519-4648-a13e-65cb4d1279b7)
+![bild](https://github.com/mrhugo13/TGMC-data-collectors-and-compiler/assets/17747087/e1e97005-1563-4c17-a76c-71b1ac348bcb)
 my current setup
 ![Code_2024-07-04_16-21-35](https://github.com/mrhugo13/TGMC-data-collectors-and-compiler/assets/17747087/f976eb93-43f6-49a8-9723-bec23c303ab2)
 4. run program via `RunData.bat` or in your debugger or whatever other method you prefer
