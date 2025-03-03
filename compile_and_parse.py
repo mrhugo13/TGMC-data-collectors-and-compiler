@@ -6,25 +6,25 @@ from datetime import datetime
 
 ## This is to determine the month so we don't have to do as much maintenance.
 manualorautomatic = int(input("Would you like to input month/year manually (1)\nor have it done automatically for todays year/month? (2)\nor have it done automatically for yesterdays year/month (3): "))
-manualorautomaticpicked = NULL
+manualorautomaticpicked = False
 match manualorautomatic:
     case 1:
         print("You have picked to input month/year manually.")
         manualorautomaticpicked = True
     case 2:
         print("You have picked to have the month/year part automated for todays year/month")
-        manualorautomaticpicked = False
         currentMonth = datetime.now().month
         currentYear = datetime.now().year
+        print("Year No. " + str(currentYear) + " and month No. " + str(currentMonth))
     case 3:
         print("You have picked to have the month/year part automated for yesterdays year/month")
-        manualorautomaticpicked = False
         currentMonth = datetime.now().month - 1
         if currentMonth == 0:
-            currentYear = datetime.now() - 1
+            currentYear = datetime.now().year - 1
             currentMonth = 12
         else:
             currentYear = datetime.now().year
+        print("Year No. " + str(currentYear) + " and month No. " + str(currentMonth))
     case _:
         print("Invalid input - Exitting program.")
         exit()
@@ -78,7 +78,7 @@ match currentMonth:
     case _:
         print("Invalid month picked - Exitting program.")
         exit()
-    
+
 # i really don't wanna maintain the month/year thingy
 file_name_txt = f"./{currentYear}/{themonth}.txt"
 file_name_txt_results = f"./{currentYear}_results/{themonth}.txt"
@@ -199,13 +199,13 @@ percentagemathing(groundmapdicts,groundmaps, groundmapstotalcount)
 percentagemathing(shipmapdicts,shipmaps, shipmapstotalcount)
 percentagemathing(gamemodedicts,gamemodes, gamemodestotalcount)
 #New stuff
-whatisit("Post-round groundside map choices", "Times picked", "% picked","% increase/decrease")
+whatisit("Post-round groundside map choices", "Times picked", "% picked","Percentage Points increase/decrease")
 thingstats(groundmapdicts,groundmaps)
 whitespace()
-whatisit("Post-round shipside map choices", "Times picked", "% picked","% increase/decrease")
+whatisit("Post-round shipside map choices", "Times picked", "% picked","Percentage Points increase/decrease")
 thingstats(shipmapdicts,shipmaps)
 whitespace()
-whatisit("Gamemodes", "Times played", "% played","% Increase/decrease")
+whatisit("Gamemodes", "Times played", "% played","Percentage Points increase/decrease")
 thingstats(gamemodedicts,gamemodes)
 whitespace()
 whatisit("Rounds played:", " ", " ", " ")
